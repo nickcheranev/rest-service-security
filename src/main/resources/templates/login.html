@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Вход</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    Неверный логин/пароль.
+</div>
+<form method="POST" action="/login">
+    <h2>Вход в систему: guest/password</h2>
+    <div>
+        <input name="username" type="text" placeholder="Username"
+               autofocus="true"/>
+        <input name="password" type="password" placeholder="Password"/>
+        <button type="submit">Войти</button>
+    </div>
+</form>
+</body>
+</html>
