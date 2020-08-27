@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -16,7 +15,6 @@ import java.util.*;
  * @author Cheranev N.
  * created on 27.08.2020.
  */
-@Service
 public class UserService implements UserDetailsService {
 
     private PasswordEncoder passwordEncoder;

@@ -21,11 +21,9 @@ import java.util.Objects;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private UserService userService;
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    @Bean
+    public UserService userService() {
+        return new UserService();
     }
 
     @Override
@@ -51,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         Objects.requireNonNull(auth)
-                .userDetailsService(Objects.requireNonNull(userService))
+                .userDetailsService(Objects.requireNonNull(userService()))
                 .passwordEncoder(bCryptPasswordEncoder());
     }
 }
