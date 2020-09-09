@@ -8,10 +8,12 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.ResourceAccessException;
 
 import java.net.URL;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Cheranev N.
@@ -38,5 +40,11 @@ class MainControllerTest {
         ResponseEntity<String> result = template.withBasicAuth("guest", "password")
                 .getForEntity(base + "/index", String.class);
         assertEquals(HttpStatus.OK, result.getStatusCode());
+    }
+
+    @Test
+    public void givenAuthRequestOnPrivateService_shouldFail() {
+        assertThrows(ResourceAccessException.class, () -> template.withBasicAuth("guest", "password1")
+                .getForEntity(base + "/index", String.class));
     }
 }

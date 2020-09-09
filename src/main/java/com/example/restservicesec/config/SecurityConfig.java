@@ -1,6 +1,6 @@
 package com.example.restservicesec.config;
 
-import com.example.restservicesec.service.UserService;
+import com.example.restservicesec.service.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,8 +22,8 @@ import java.util.Objects;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public UserService userService() {
-        return new UserService();
+    public UserAuthService userAuthService() {
+        return new UserAuthService();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         Objects.requireNonNull(auth)
-                .userDetailsService(Objects.requireNonNull(userService()))
+                .userDetailsService(Objects.requireNonNull(userAuthService()))
                 .passwordEncoder(bCryptPasswordEncoder());
     }
 }
